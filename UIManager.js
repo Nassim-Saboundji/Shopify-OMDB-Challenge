@@ -6,7 +6,19 @@
 
 //don't forget to delete the search results between each search query.
 
+function clearResults(){
+    let resultsContainer = document.getElementById("results");
+    while(resultsContainer.firstChild){
+        resultsContainer.firstChild.remove();
+    }
+}
+
+
+
 function getResults(){
+    //clear the current search results before making a new search.
+    clearResults();
+    
     let userQuery = document.getElementById("query").value;
 
 
@@ -25,8 +37,12 @@ function getResults(){
         }
 
         console.log(validResultArray);
-        generateMovieSpecs(validResultArray);
-
+        let finalResults = generateMovieSpecs(validResultArray);
+        
+        //Will display all the results in the results tab.
+        for (let i = 0; i < finalResults.length; i++) {
+            injectCard(finalResults[i], "results");
+        }
 
     })
     .catch(error => {
@@ -55,9 +71,12 @@ function generateMovieSpecs(validResultArray){
         
     }
     console.log(movieSpecs);
-    injectCard(movieSpecs[0], "results");
+    return movieSpecs;
 }
 
+
+// Will inject a card containing a poster, a title with the year of release
+// and a button to nominate/remove.
 function injectCard(aMovieSpec, sectionId){
     let resultsContainer = document.getElementById(sectionId);
     
@@ -67,7 +86,11 @@ function injectCard(aMovieSpec, sectionId){
     //put in that container the poster element 
     aMovieSpec.cardElement.appendChild(aMovieSpec.posterElement);
     //provide the poster link to the posterElement
-    aMovieSpec.posterElement.src = aMovieSpec.posterLink;
+    //also making sure that we have a valid poster link.
+    if(aMovieSpec.posterLink != "N/A"){
+       aMovieSpec.posterElement.src = aMovieSpec.posterLink; 
+    }
+    
 
     //after having provided the poster image, inject the title element
     //in the resultsContainer
@@ -76,6 +99,15 @@ function injectCard(aMovieSpec, sectionId){
     //inject the title + year inside the title element so it can be visible
     //to the user.
     aMovieSpec.titleElement.textContent = aMovieSpec.title + "  (" + aMovieSpec.year + ") ";
+    
 
+    aMovieSpec.cardElement.appendChild(aMovieSpec.actionButton);
+    
+    //change the button text depending on the section where it lives.
+    if (sectionId == "results") {
+        aMovieSpec.actionButton.textContent = "Nominate";
+    } else {
+        aMovieSpec.actionButton.textContent = "Remove"; 
+    }
 
 }
