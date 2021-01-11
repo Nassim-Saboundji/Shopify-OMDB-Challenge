@@ -4,6 +4,8 @@
 //nomination.
 //don't forget to add a favicon for the webpage!
 
+//don't forget to delete the search results between each search query.
+
 function getResults(){
     let userQuery = document.getElementById("query").value;
 
@@ -53,10 +55,27 @@ function generateMovieSpecs(validResultArray){
         
     }
     console.log(movieSpecs);
+    injectCard(movieSpecs[0], "results");
 }
 
-function injectCard(aMovieSpec, section){
-    let resultsContainer = document.getElementById("results");
-    //append the movie card to the results se
+function injectCard(aMovieSpec, sectionId){
+    let resultsContainer = document.getElementById(sectionId);
+    
+    //add the container to the result section
     resultsContainer.appendChild(aMovieSpec.cardElement);
+    
+    //put in that container the poster element 
+    aMovieSpec.cardElement.appendChild(aMovieSpec.posterElement);
+    //provide the poster link to the posterElement
+    aMovieSpec.posterElement.src = aMovieSpec.posterLink;
+
+    //after having provided the poster image, inject the title element
+    //in the resultsContainer
+    aMovieSpec.cardElement.appendChild(aMovieSpec.titleElement);
+
+    //inject the title + year inside the title element so it can be visible
+    //to the user.
+    aMovieSpec.titleElement.textContent = aMovieSpec.title + "  (" + aMovieSpec.year + ") ";
+
+
 }
