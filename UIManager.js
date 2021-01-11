@@ -3,8 +3,28 @@
 //when a movie card is created keep track of it's id even when removed from 
 //nomination.
 //don't forget to add a favicon for the webpage!
+//make sure that the user doesn't have to click the search button
+//for results to update
 
 //don't forget to delete the search results between each search query.
+
+
+/// update the search results after the user is done typing
+let timer; 
+let timeoutVal = 1000;
+
+let resultsContainer = document.getElementById("results");
+let textBox = document.getElementById("query");
+
+textBox.addEventListener('keyup', handleKeyUp);
+
+function handleKeyUp(e) {
+    window.clearTimeout(timer);
+    timer = window.setTimeout(() => {
+        getResults();
+    }, timeoutVal)
+}
+
 
 function clearResults(){
     let resultsContainer = document.getElementById("results");
