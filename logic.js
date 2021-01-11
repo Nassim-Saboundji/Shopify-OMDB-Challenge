@@ -1,5 +1,9 @@
 // api key : defff54c
 
+//when a movie card is created keep track of it's id even when removed from 
+//nomination.
+//don't forget to add a favicon for the webpage!
+
 function getResults(){
     let userQuery = document.getElementById("query").value;
 
@@ -7,15 +11,21 @@ function getResults(){
     fetch("http://www.omdbapi.com/?apikey=defff54c&s=" + userQuery)
     .then(async response => {
         const data = await response.json();
-
-        // check for error response
-        if (!response.ok) {
-            // get error message from body or default to response statusText
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
+    
+        let resultArray = data.Search;
+    
+        
+        let validResultArray = []
+        for (let i = 0; i < resultArray.length; i++){
+            if(resultArray[i]["Type"] == "movie"){
+                validResultArray.push(resultArray[i]);
+            }
         }
 
-        console.log(data);
+        console.log(validResultArray);
+        
+
+
     })
     .catch(error => {
         console.error('There was an error!', error);
