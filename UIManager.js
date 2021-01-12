@@ -134,25 +134,43 @@ function injectCard(aMovieSpec){
     
     aMovieSpec.actionButton.textContent = "Nominate";
     aMovieSpec.actionButton.onclick = function(){
-        let nominations = document.getElementById("nominations");
-        let cardClone = aMovieSpec.cardElement.cloneNode(true);
+        
+        let nbTitles = document.getElementById('nominations').childNodes.length;
+            if(nbTitles < 5){
+                let nominations = document.getElementById("nominations");
+                let cardClone = aMovieSpec.cardElement.cloneNode(true);
             
-        //disable the button in the original card in the search results
-        aMovieSpec.actionButton.disabled = true;
-        nominations.appendChild(cardClone);
+                //disable the button in the original card in the search results
+                aMovieSpec.actionButton.disabled = true;
+                nominations.appendChild(cardClone);
        
 
-        //change the button text from "Nominate" to "Remove"
-        cardClone.childNodes[2].textContent = "Remove";
+                //change the button text from "Nominate" to "Remove"
+                cardClone.childNodes[2].textContent = "Remove";
 
-        cardClone.childNodes[2].onclick = function(){
-            //enable the original card if it's in the current search results
-            reEnableOnRemove(cardClone.id);           
-            cardClone.remove();
+                cardClone.childNodes[2].onclick = function(){
             
-        };
+                    //enable the original card if it's in the current search results
+                    reEnableOnRemove(cardClone.id);           
+                    cardClone.remove();
+            
+                };
+            } else {
+                notifyUser();
+            }
     };    
    
+}
+
+function notifyUser(){        
+    let notifications = document.getElementById('notifications');
+    let notify =  document.createElement('p');
+    notify.textContent = "You have nominated 5 titles already!";
+    notifications.appendChild(notify);
+   
+    window.setTimeout(() => {
+        notify.remove();
+    }, 3000);
 }
 
 
