@@ -65,7 +65,8 @@ function getResults(){
             injectCard(finalResults[i]);
         }
 
-        disableOnNewSearch(finalResults);
+        //will disable titles that are already in the nomination section.
+        disableOnNewSearch();
 
 
     })
@@ -114,7 +115,7 @@ function injectCard(aMovieSpec){
     
     //set an id for the card so we can keep track of it.
     aMovieSpec.cardElement.id = aMovieSpec.id;
-
+    
     //put in that container the poster element 
     aMovieSpec.cardElement.appendChild(aMovieSpec.posterElement);
     //provide the poster link to the posterElement
@@ -127,11 +128,7 @@ function injectCard(aMovieSpec){
     //after having provided the poster image, inject the title element
     //in the resultsContainer
     aMovieSpec.cardElement.appendChild(aMovieSpec.titleElement);
-
-    
     aMovieSpec.titleElement.textContent = aMovieSpec.title + "  (" + aMovieSpec.year + ") ";
-    
-
     aMovieSpec.cardElement.appendChild(aMovieSpec.actionButton);
     
     
@@ -143,14 +140,14 @@ function injectCard(aMovieSpec){
         //disable the button in the original card in the search results
         aMovieSpec.actionButton.disabled = true;
         nominations.appendChild(cardClone);
+       
 
         //change the button text from "Nominate" to "Remove"
         cardClone.childNodes[2].textContent = "Remove";
 
         cardClone.childNodes[2].onclick = function(){
             //enable the original card if it's in the current search results
-            aMovieSpec.actionButton.disabled = false;
-            
+            reEnableOnRemove(cardClone.id);           
             cardClone.remove();
             
         };
@@ -158,23 +155,34 @@ function injectCard(aMovieSpec){
    
 }
 
+
+function reEnableOnRemove(IdOfCardToRemove){
+    let results = document.getElementById('results');
+    for(let i = 0; i < results.childNodes.length; i++){
+        if(results.childNodes[i].id == IdOfCardToRemove){
+            results.childNodes[i].childNodes[2].disabled = false;
+        }
+    }
+}
+
+
+
+
 //when doing a new search check if a title in the results
 //is already available in the nominations and if yes disable it's button.
-function disableOnNewSearch(resultsArray){
+function disableOnNewSearch(){
     let results = document.getElementById('results');
     let nominations = document.getElementById('nominations');
-    console.log(results.childNodes);
-    console.log(nominations.childNodes);
-
+    
     for(let i = 0; i < nominations.childNodes.length; i++) {
-        for(let j = 0; j < resultsArray.length; j++){
-            if(nominations.childNodes[i].id == resultsArray[j].id){
-                resultsArray[j].actionButton.disabled = true;
+        for(let j = 0; j < results.childNodes.length; j++){
+            if(nominations.childNodes[i].id == results.childNodes[j].id){   
+                results.childNodes[j].childNodes[2].disabled = true;
+               
+                //results.childNodes[j].childNodes[2].disabled = false;
+                
             }
         }
     }
-
-
     
-
 }
