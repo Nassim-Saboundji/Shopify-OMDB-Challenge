@@ -95,6 +95,8 @@ function generateMovieSpecs(validResultArray){
 }
 
 
+
+
 // Will inject a card containing a poster, a title with the year of release
 // and a button to nominate/remove.
 function injectCard(aMovieSpec, sectionId){
@@ -103,6 +105,9 @@ function injectCard(aMovieSpec, sectionId){
     //add the container to the result section
     resultsContainer.appendChild(aMovieSpec.cardElement);
     
+    //set an id for the card so we can keep track of it.
+    aMovieSpec.cardElement.id = aMovieSpec.id;
+
     //put in that container the poster element 
     aMovieSpec.cardElement.appendChild(aMovieSpec.posterElement);
     //provide the poster link to the posterElement
@@ -126,6 +131,19 @@ function injectCard(aMovieSpec, sectionId){
     //change the button text depending on the section where it lives.
     if (sectionId == "results") {
         aMovieSpec.actionButton.textContent = "Nominate";
+        aMovieSpec.actionButton.onclick = function(){
+            let nominations = document.getElementById("nominations");
+            let cardClone = aMovieSpec.cardElement.cloneNode(true);
+            
+            //change the button text from "Nominate" to "Remove"
+            cardClone.childNodes[2].textContent = "Remove";
+            
+            //disable the button in the original card in the search results
+            aMovieSpec.actionButton.disabled = true;
+
+            nominations.appendChild(cardClone);
+
+        };
     } else {
         aMovieSpec.actionButton.textContent = "Remove"; 
     }
