@@ -65,7 +65,7 @@ function getResults(){
             injectCard(finalResults[i]);
         }
 
-        disableOnNewSearch();
+        disableOnNewSearch(finalResults);
 
 
     })
@@ -160,9 +160,21 @@ function injectCard(aMovieSpec){
 
 //when doing a new search check if a title in the results
 //is already available in the nominations and if yes disable it's button.
-function disableOnNewSearch(){
+function disableOnNewSearch(resultsArray){
     let results = document.getElementById('results');
     let nominations = document.getElementById('nominations');
     console.log(results.childNodes);
     console.log(nominations.childNodes);
+
+    for(let i = 0; i < nominations.childNodes.length; i++) {
+        for(let j = 0; j < resultsArray.length; j++){
+            if(nominations.childNodes[i].id == resultsArray[j].id){
+                resultsArray[j].actionButton.disabled = true;
+            }
+        }
+    }
+
+
+    
+
 }
