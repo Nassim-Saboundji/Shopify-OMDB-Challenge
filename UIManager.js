@@ -59,15 +59,22 @@ function getResults(){
         console.log(validResultArray);
         let finalResults = generateMovieSpecs(validResultArray);
         
+        
         //Will display all the results in the results tab.
         for (let i = 0; i < finalResults.length; i++) {
-            injectCard(finalResults[i], "results");
+            injectCard(finalResults[i]);
         }
+
+        disableOnNewSearch();
+
 
     })
     .catch(error => {
-        console.error('There was an error!', error);
         //insert something into the DOM to notify the user that there is an error.
+        let errorMessage = document.createElement("p");
+        errorMessage.textContent = "Results for this search are not available :/ ";
+        let resultsContainer = document.getElementById("results");
+        resultsContainer.appendChild(errorMessage);
     });
 }
 
@@ -99,8 +106,8 @@ function generateMovieSpecs(validResultArray){
 
 // Will inject a card containing a poster, a title with the year of release
 // and a button to nominate/remove.
-function injectCard(aMovieSpec, sectionId){
-    let resultsContainer = document.getElementById(sectionId);
+function injectCard(aMovieSpec){
+    let resultsContainer = document.getElementById("results");
     
     //add the container to the result section
     resultsContainer.appendChild(aMovieSpec.cardElement);
@@ -121,31 +128,41 @@ function injectCard(aMovieSpec, sectionId){
     //in the resultsContainer
     aMovieSpec.cardElement.appendChild(aMovieSpec.titleElement);
 
-    //inject the title + year inside the title element so it can be visible
-    //to the user.
+    
     aMovieSpec.titleElement.textContent = aMovieSpec.title + "  (" + aMovieSpec.year + ") ";
     
 
     aMovieSpec.cardElement.appendChild(aMovieSpec.actionButton);
     
-    //change the button text depending on the section where it lives.
-    if (sectionId == "results") {
-        aMovieSpec.actionButton.textContent = "Nominate";
-        aMovieSpec.actionButton.onclick = function(){
-            let nominations = document.getElementById("nominations");
-            let cardClone = aMovieSpec.cardElement.cloneNode(true);
+    
+    aMovieSpec.actionButton.textContent = "Nominate";
+    aMovieSpec.actionButton.onclick = function(){
+        let nominations = document.getElementById("nominations");
+        let cardClone = aMovieSpec.cardElement.cloneNode(true);
             
-            //change the button text from "Nominate" to "Remove"
-            cardClone.childNodes[2].textContent = "Remove";
+        //disable the button in the original card in the search results
+        aMovieSpec.actionButton.disabled = true;
+        nominations.appendChild(cardClone);
+
+        //change the button text from "Nominate" to "Remove"
+        cardClone.childNodes[2].textContent = "Remove";
+
+        cardClone.childNodes[2].onclick = function(){
+            //enable the original card if it's in the current search results
+            aMovieSpec.actionButton.disabled = false;
             
-            //disable the button in the original card in the search results
-            aMovieSpec.actionButton.disabled = true;
-
-            nominations.appendChild(cardClone);
-
+            cardClone.remove();
+            
         };
-    } else {
-        aMovieSpec.actionButton.textContent = "Remove"; 
-    }
+    };    
+   
+}
 
+//when doing a new search check if a title in the results
+//is already available in the nominations and if yes disable it's button.
+function disableOnNewSearch(){
+    let results = document.getElementById('results');
+    let nominations = document.getElementById('nominations');
+    console.log(results.childNodes);
+    console.log(nominations.childNodes);
 }
