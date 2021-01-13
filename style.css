@@ -1,0 +1,26 @@
+button {
+    border-radius: 20px;
+    font-size: 16px;
+    padding: 5px 20px;
+    border: none;
+    color: #edf2f4;
+    background-color: #2b2d42;
+}
+
+button:disabled {
+    background-color: #8d99ae;
+}
+
+.sectionTitle {
+    text-align:center;
+}
+
+.movieCard {
+    text-align:center;
+    padding-bottom:10%;
+}
+
+.posterImage {
+    filter: drop-shadow(0 0 0.65rem grey);
+    border-radius: 24px;
+}

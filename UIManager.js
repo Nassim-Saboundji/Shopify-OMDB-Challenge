@@ -136,13 +136,15 @@ function injectCard(aMovieSpec){
     
     //set an id for the card so we can keep track of it.
     aMovieSpec.cardElement.id = aMovieSpec.id;
+    aMovieSpec.cardElement.className = "movieCard";
     
     //put in that container the poster element 
     aMovieSpec.cardElement.appendChild(aMovieSpec.posterElement);
     //provide the poster link to the posterElement
     //also making sure that we have a valid poster link.
     if(aMovieSpec.posterLink != "N/A"){
-       aMovieSpec.posterElement.src = aMovieSpec.posterLink; 
+       aMovieSpec.posterElement.src = aMovieSpec.posterLink;
+       aMovieSpec.posterElement.className = "posterImage"; 
     }
     
 
