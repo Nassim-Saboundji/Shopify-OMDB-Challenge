@@ -23,7 +23,7 @@ function loadSavedNominations(){
 }
 
 //save the nominations when the user leaves the webpage.
-window.addEventListener('beforeunload', function(){
+window.addEventListener('unload', function(){
     let array = document.getElementById("nominations").innerHTML;
     localStorage.setItem('data', array);
 });
