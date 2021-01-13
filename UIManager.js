@@ -1,4 +1,4 @@
-// api key : defff54c
+//The UI manager takes care of all the UI functionnalities.
 // don't forget to add a favicon
 
 function loadSavedNominations(){
@@ -194,7 +194,7 @@ function injectCard(aMovieSpec){
 function notifyUser(){        
     let notifications = document.getElementById('notifications');
     let notify =  document.createElement('p');
-    notify.textContent = "You have nominated 5 titles already!";
+    notify.textContent = "You have nominated 5 titles!";
     notify.id = 'notify';
     notifications.appendChild(notify);
    
