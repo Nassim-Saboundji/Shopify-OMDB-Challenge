@@ -6,12 +6,17 @@ function loadSavedNominations(){
     document.getElementById("nominations").innerHTML = data;
     let nominations = document.getElementById("nominations").childNodes;
     for (let i = 0; i < nominations.length; i++){
+        
         nominations[i].childNodes[2].onclick = function(){
-            
-            //enable the original card if it's in the current search results
-            reEnableOnRemove(nominations[i].id);           
-            nominations[i].remove();
-    
+            console.log(nominations);
+            if(nominations.length == 1){
+                reEnableOnRemove(nominations[0].id);
+                nominations[0].remove();
+            }else{
+               //enable the original card if it's in the current search results
+                reEnableOnRemove(nominations[i].id);           
+                nominations[i].remove(); 
+            }
         };
     }
     
