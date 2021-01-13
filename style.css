@@ -1,3 +1,24 @@
+#mainHeader {
+    text-align:center;
+}
+
+
+#query {
+    background-image:url(./search.png); 
+    background-repeat: no-repeat; 
+    background-position: 2% 35%;
+    background-size:20px;
+    
+    border-radius: 20px;
+    font-size: 16px;
+    padding: 5px 30px;
+    border-color: #2b2d42;
+}
+
+#query:focus {
+    outline: none;
+}
+
 button {
     border-radius: 20px;
     font-size: 16px;
@@ -9,6 +30,10 @@ button {
 
 button:disabled {
     background-color: #8d99ae;
+}
+
+button:focus {
+    outline: none;
 }
 
 .sectionTitle {
@@ -24,3 +49,8 @@ button:disabled {
     filter: drop-shadow(0 0 0.65rem grey);
     border-radius: 24px;
 }
+
+p {
+    text-align:center;
+}
+
