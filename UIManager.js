@@ -77,7 +77,7 @@ function getResults(){
             }
         }
 
-        console.log(validResultArray);
+        
         let finalResults = generateMovieSpecs(validResultArray);
         
         
@@ -119,7 +119,7 @@ function generateMovieSpecs(validResultArray){
         movieSpecs.push(aMovieSpec);
         
     }
-    console.log(movieSpecs);
+    
     return movieSpecs;
 }
 
@@ -159,7 +159,13 @@ function injectCard(aMovieSpec){
     aMovieSpec.actionButton.onclick = function(){
         
         let nbTitles = document.getElementById('nominations').childNodes.length;
-            if(nbTitles < 4){
+            console.log(document.getElementById('nominations').childNodes);
+            if(nbTitles < 5){
+
+                if (nbTitles == 4) {
+                    notifyUser();
+                }
+
                 let nominations = document.getElementById("nominations");
                 let cardClone = aMovieSpec.cardElement.cloneNode(true);
             
@@ -189,6 +195,7 @@ function notifyUser(){
     let notifications = document.getElementById('notifications');
     let notify =  document.createElement('p');
     notify.textContent = "You have nominated 5 titles already!";
+    notify.id = 'notify';
     notifications.appendChild(notify);
    
     window.setTimeout(() => {

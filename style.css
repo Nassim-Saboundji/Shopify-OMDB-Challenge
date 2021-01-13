@@ -1,3 +1,21 @@
+#notifications {
+    //margin: auto;
+    //display: flex;
+    position:fixed;
+    z-index: 2;
+}
+
+#notify {
+    position:fixed;
+    z-index: 2;
+    background-color: #ef233c;
+    color: #edf2f4;
+    font-size: 24px;
+    border-radius: 20px;
+    padding: 5px 30px;
+    
+}
+
 #mainHeader {
     text-align:center;
 }
