@@ -1,15 +1,31 @@
 // api key : defff54c
 
-//when a movie card is created keep track of it's id even when removed from 
-//nomination.
-//don't forget to add a favicon for the webpage!
-//make sure that the user doesn't have to click the search button
-//for results to update
 
-//don't forget to delete the search results between each search query.
+function loadSavedNominations(){
+    let data = localStorage.getItem('data');
+    document.getElementById("nominations").innerHTML = data;
+    let nominations = document.getElementById("nominations").childNodes;
+    for (let i = 0; i < nominations.length; i++){
+        nominations[i].childNodes[2].onclick = function(){
+            
+            //enable the original card if it's in the current search results
+            reEnableOnRemove(nominations[i].id);           
+            nominations[i].remove();
+    
+        };
+    }
+    
+}
+
+//save the nominations when the user leaves the webpage.
+window.addEventListener('beforeunload', function(){
+    let array = document.getElementById("nominations").innerHTML;
+    localStorage.setItem('data', array);
+});
+
+loadSavedNominations();
 
 
-/// update the search results after the user is done typing
 let timer; 
 let timeoutVal = 1000;
 
@@ -204,3 +220,6 @@ function disableOnNewSearch(){
     }
     
 }
+
+
+
