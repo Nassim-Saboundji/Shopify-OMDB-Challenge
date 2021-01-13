@@ -110,7 +110,7 @@ function generateMovieSpecs(validResultArray){
             year: validResultArray[i]["Year"],
             id: validResultArray[i]["imdbID"],
             posterLink: validResultArray[i]["Poster"],
-            titleElement: document.createElement("h3"),
+            titleElement: document.createElement("h4"),
             posterElement: document.createElement("img"),
             cardElement: document.createElement("div"),
             actionButton: document.createElement("button")

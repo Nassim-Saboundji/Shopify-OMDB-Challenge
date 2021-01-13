@@ -2,6 +2,14 @@
     text-align:center;
 }
 
+#results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: baseline;
+    align-content: space-between;
+}
+
 
 #query {
     background-image:url(./search.png); 
@@ -41,14 +49,19 @@ button:focus {
 }
 
 .movieCard {
+    flex-shrink: 4;
     text-align:center;
     padding-bottom:10%;
 }
 
 .posterImage {
     filter: drop-shadow(0 0 0.65rem grey);
-    border-radius: 24px;
+    border-radius: 12px;
+    width:  200px;
+    height: 300px;
+    object-fit: cover;
 }
+
 
 p {
     text-align:center;
