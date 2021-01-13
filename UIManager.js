@@ -1,5 +1,5 @@
 //The UI manager takes care of all the UI functionnalities.
-// don't forget to add a favicon
+
 
 function loadSavedNominations(){
     let data = localStorage.getItem('data');
@@ -62,7 +62,7 @@ function getResults(){
     
     let userQuery = document.getElementById("query").value;
 
-
+    
     fetch("https://www.omdbapi.com/?apikey=defff54c&s=" + userQuery)
     .then(async response => {
         const data = await response.json();
