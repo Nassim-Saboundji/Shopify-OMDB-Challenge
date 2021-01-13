@@ -63,7 +63,7 @@ function getResults(){
     let userQuery = document.getElementById("query").value;
 
 
-    fetch("http://www.omdbapi.com/?apikey=defff54c&s=" + userQuery)
+    fetch("https://www.omdbapi.com/?apikey=defff54c&s=" + userQuery)
     .then(async response => {
         const data = await response.json();
     
