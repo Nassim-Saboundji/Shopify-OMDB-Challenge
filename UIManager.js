@@ -159,7 +159,7 @@ function injectCard(aMovieSpec){
     aMovieSpec.actionButton.onclick = function(){
         
         let nbTitles = document.getElementById('nominations').childNodes.length;
-            if(nbTitles < 5){
+            if(nbTitles < 4){
                 let nominations = document.getElementById("nominations");
                 let cardClone = aMovieSpec.cardElement.cloneNode(true);
             
