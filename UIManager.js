@@ -145,6 +145,9 @@ function injectCard(aMovieSpec){
     if(aMovieSpec.posterLink != "N/A"){
        aMovieSpec.posterElement.src = aMovieSpec.posterLink;
        aMovieSpec.posterElement.className = "posterImage"; 
+    } else {
+       aMovieSpec.posterElement.src = './placeholder.jpg';
+       aMovieSpec.posterElement.className = "posterImage"; 
     }
     
 
