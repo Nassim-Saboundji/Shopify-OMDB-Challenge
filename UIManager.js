@@ -1,5 +1,5 @@
 // api key : defff54c
-
+// don't forget to add a favicon
 
 function loadSavedNominations(){
     let data = localStorage.getItem('data');
