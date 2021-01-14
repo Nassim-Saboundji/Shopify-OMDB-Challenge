@@ -1,3 +1,14 @@
+p,section,h3 {
+    font-family: 'Roboto', serif;
+    color: #2b2d42;    
+}
+
+h1 {
+   font-family: 'Lobster', serif; 
+   color: #2b2d42;
+}
+
+
 #notifications {
     //margin: auto;
     //display: flex;
