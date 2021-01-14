@@ -8,7 +8,6 @@ function loadSavedNominations(){
     for (let i = 0; i < nominations.length; i++){
         
         nominations[i].childNodes[2].onclick = function(){
-            console.log(nominations);
             if(nominations.length == 1){
                 reEnableOnRemove(nominations[0].id);
                 nominations[0].remove();
@@ -162,7 +161,7 @@ function injectCard(aMovieSpec){
     aMovieSpec.actionButton.onclick = function(){
         
         let nbTitles = document.getElementById('nominations').childNodes.length;
-            console.log(document.getElementById('nominations').childNodes);
+            
             if(nbTitles < 5){
 
                 if (nbTitles == 4) {
