@@ -29,7 +29,7 @@ window.addEventListener('unload', function(){
 
 loadSavedNominations();
 
-
+// This code updates the search results when the user stops typing
 let timer; 
 let timeoutVal = 1000;
 
@@ -44,7 +44,7 @@ function handleKeyUp(e) {
         getResults();
     }, timeoutVal)
 }
-
+/////////////
 
 function clearResults(){
     let resultsContainer = document.getElementById("results");
