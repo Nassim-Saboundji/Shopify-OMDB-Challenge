@@ -7,4 +7,4 @@ The requirements are detailed here : https://docs.google.com/document/d/1AZO0BZw
 
 When the user leaves the webpage the nominations are saved! 
 
-!(demo)[shopify-challenge.gif]
+![demo](shopify-challenge.gif)
